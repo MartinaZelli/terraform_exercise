@@ -1,4 +1,4 @@
-resource "libvirt_domain" "control_nodes" {
+resource "libvirt_domain" "vm1" {
   name        = "vm1"
   type        = "kvm"
   memory      = 1024

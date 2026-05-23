@@ -27,7 +27,7 @@ resource "libvirt_volume" "vm1_disk" {
   }
 
   backing_store = {
-    path = libvirt_volume.ubuntu_base.path
+    path = libvirt_volume.ubuntu.path
     format = {
       type = "qcow2"
     }
