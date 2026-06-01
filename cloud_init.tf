@@ -1,15 +1,15 @@
 resource "libvirt_cloudinit_disk" "vm_init" {
-  count = var.control_count
-  name  = "vm-${count.index}-cloudinit"
+   for_each = local.vms
+  name     = "${each.value.hostname}-cloudinit"
 
   meta_data = <<EOF
-instance-id: vm-${count.index}
-local-hostname: vm-${count.index}
+instance-id: ${each.value.hostname}
+local-hostname: ${each.value.hostname}
 EOF
 
   user_data = <<EOF
 #cloud-config
-hostname: vm-${count.index}.local
+hostname: ${each.value.hostname}.local
 users:
   - name: ubuntu
     groups: sudo
@@ -38,10 +38,10 @@ version: 2
 ethernets:
   eth0:
     match:
-      macaddress: "${local.control_mgmt_macs[count.index]}"
+      macaddress: "${each.value.mac}"
     set-name: eth0
     addresses:
-      - "192.168.1.${72 + count.index}/24"
+      - "${each.value.ip}/24"
     gateway4: "192.168.1.1"
     nameservers:
       addresses:

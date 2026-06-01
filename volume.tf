@@ -16,10 +16,10 @@ resource "libvirt_volume" "ubuntu" {
 }
 
 resource "libvirt_volume" "vm_disk" {
-  count    = var.control_count
-  name     = "vm-${count.index}.qcow2"
+  for_each = local.vms
+  name     = "${each.value.hostname}.qcow2"
   pool     = var.storage_pool
-  capacity = 20737418240
+  capacity = each.value.disk_gb * 1024 * 1024 * 1024
 
 
   target = {
@@ -37,13 +37,13 @@ resource "libvirt_volume" "vm_disk" {
 }
 
 resource "libvirt_volume" "vm_init_iso" {
-  count = var.control_count
-  name  = "vm-${count.index}-init.iso"
-  pool  = var.storage_pool
+  for_each = local.vms
+  name     = "${each.value.hostname}-init.iso"
+  pool     = var.storage_pool
 
   create = {
     content = {
-      url = libvirt_cloudinit_disk.vm_init[count.index].path
+      url = libvirt_cloudinit_disk.vm_init[each.key].path
     }
   }
 }
