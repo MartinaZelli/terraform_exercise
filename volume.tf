@@ -15,8 +15,9 @@ resource "libvirt_volume" "ubuntu" {
   }
 }
 
-resource "libvirt_volume" "vm1_disk" {
-  name     = "vm1.qcow2"
+resource "libvirt_volume" "vm_disk" {
+  count    = var.control_count
+  name     = "vm-${count.index}.qcow2"
   pool     = var.storage_pool
   capacity = 20737418240
 
@@ -35,13 +36,14 @@ resource "libvirt_volume" "vm1_disk" {
   }
 }
 
-resource "libvirt_volume" "vm1_init_iso" {
-  name  = "vm1-init.iso"
+resource "libvirt_volume" "vm_init_iso" {
+  count = var.control_count
+  name  = "vm-${count.index}-init.iso"
   pool  = var.storage_pool
 
   create = {
     content = {
-      url = libvirt_cloudinit_disk.vm1_init.path
+      url = libvirt_cloudinit_disk.vm_init[count.index].path
     }
   }
 }

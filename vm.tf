@@ -1,5 +1,6 @@
-resource "libvirt_domain" "vm1" {
-  name        = "vm1"
+resource "libvirt_domain" "vm" {
+  count       = var.control_count
+  name        = "vm-${count.index}"
   type        = "kvm"
   memory      = 2048
   memory_unit = "MiB"
@@ -22,7 +23,7 @@ resource "libvirt_domain" "vm1" {
         source = {
           volume = {
             pool   = var.storage_pool
-            volume = libvirt_volume.vm1_disk.name
+            volume = libvirt_volume.vm_disk[count.index].name
           }
         }
         target = {
@@ -37,8 +38,8 @@ resource "libvirt_domain" "vm1" {
         device = "cdrom"
         source = {
           volume = {
-            pool   = libvirt_volume.vm1_init_iso.pool
-            volume = libvirt_volume.vm1_init_iso.name
+            pool   = libvirt_volume.vm_init_iso[count.index].pool
+            volume = libvirt_volume.vm_init_iso[count.index].name
           }
         }
         target = {
@@ -52,7 +53,7 @@ resource "libvirt_domain" "vm1" {
       {
         type  = "network"
         model = { type = "virtio" }
-        mac   = { address = local.control_mgmt_macs[0] }
+        mac   = { address = local.control_mgmt_macs[count.index] }
         source = {
           network = {
             network = libvirt_network.network.name
