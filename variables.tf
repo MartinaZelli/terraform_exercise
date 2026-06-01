@@ -40,5 +40,5 @@ variable "bridge_name" {
 
 variable "control_count" {
   type    = number
-  default = 1
+  default = 2
 }
