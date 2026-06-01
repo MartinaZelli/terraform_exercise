@@ -41,7 +41,6 @@ ethernets:
       macaddress: "${local.control_mgmt_macs[count.index]}"
     set-name: eth0
     addresses:
-      - addresses:
       - "192.168.1.${72 + count.index}/24"
     gateway4: "192.168.1.1"
     nameservers:
