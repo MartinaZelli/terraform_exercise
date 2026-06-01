@@ -37,7 +37,7 @@ version: 2
 ethernets:
   eth0:
     match:
-      macaddress: "${libvirt_domain.vm1.network_interface[0].mac}"
+      macaddress: "${local.control_mgmt_macs[0]}"
     set-name: eth0
     addresses:
       - "192.168.1.72/24"

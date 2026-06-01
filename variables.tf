@@ -37,3 +37,8 @@ variable "bridge_name" {
     default     = "bridge0"
     description = "Name of the libvirt bridge to attach the VM's network interface to"
 }
+
+variable "control_count" {
+  type    = number
+  default = 1
+}

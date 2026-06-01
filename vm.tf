@@ -52,7 +52,7 @@ resource "libvirt_domain" "vm1" {
       {
         type  = "network"
         model = { type = "virtio" }
-        //mac   = { address = local.control_mgmt_macs[count.index] }
+        mac   = { address = local.control_mgmt_macs[0] }
         source = {
           network = {
             network = libvirt_network.network.name
