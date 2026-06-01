@@ -6,9 +6,9 @@ resource "libvirt_network" "network" {
     name = var.bridge_name
   }
 
-  domain = {
-    name = "local"
-  }
+  //domain = {
+  //  name = "local"
+ // }
 
   forward = {
     mode = "bridge"

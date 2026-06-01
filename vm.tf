@@ -1,7 +1,7 @@
 resource "libvirt_domain" "vm1" {
   name        = "vm1"
   type        = "kvm"
-  memory      = 1024
+  memory      = 2048
   memory_unit = "MiB"
   vcpu        = 2
   running     = true

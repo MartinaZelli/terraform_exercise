@@ -18,7 +18,8 @@ resource "libvirt_volume" "ubuntu" {
 resource "libvirt_volume" "vm1_disk" {
   name     = "vm1.qcow2"
   pool     = var.storage_pool
-  capacity = 10240
+  capacity = 20737418240
+
 
   target = {
     format = {
