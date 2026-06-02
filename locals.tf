@@ -23,6 +23,14 @@ locals {
       memory   = 2048
       vcpu     = 2
       disk_gb  = 10
+    },
+    "lb" = {
+      hostname = "menu-lb"
+      ip       = "192.168.1.75"          # <-- IP dedicato al Load Balancer
+      mac      = "02:00:00:01:00:04"      # <-- Nuovo MAC Address univoco
+      memory   = 2048
+      vcpu     = 2
+      disk_gb  = 10
     }
   }
 }
