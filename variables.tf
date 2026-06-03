@@ -25,10 +25,10 @@ variable "dns2" {
   default = "8.8.8.8"
 }
 
-variable "ssh_public_key_path" {
+variable "ssh_public_key" {
     type        = string
-    description = "Percorso locale della chiave SSH pubblica"
-    default     = "~/.ssh/id_archvm.pub"
+    description = "Path to the SSH public key to be injected into the VM for access"
+    default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJR1b9GQMkQZmRGpRzobVxAJ8aaqaB61+7pjV0xl/wwA"
 
 }
 
