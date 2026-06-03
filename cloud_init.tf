@@ -16,7 +16,7 @@ resource "libvirt_cloudinit_disk" "vm_init" {
         shell: /bin/bash
         sudo: ['ALL=(ALL) NOPASSWD:ALL']
         ssh_authorized_keys:
-          - ${var.ssh_public_key}
+          - ${file(var.ssh_public_key_path)}
     write_files:
       - path: /etc/apt/preferences.d/no-snapd
         content: |
