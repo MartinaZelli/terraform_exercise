@@ -6,6 +6,7 @@ resource "libvirt_domain" "vm" {
   memory_unit = "MiB"
   vcpu        = each.value.vcpu
   running     = true
+  autostart   = true
 
   cpu = {
     mode = "host-passthrough"
