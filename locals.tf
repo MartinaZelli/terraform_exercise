@@ -32,10 +32,15 @@ locals {
     "ldap" = {
       hostname = "ldap"
       ip       = "192.168.1.76"
-      mac      = "02:00:00:01:00:05"     
+      mac      = "02:00:00:01:00:05"
       memory   = 1024                    # override: LDAP è leggero, dimezzo i 2048 di default
       vcpu     = 1                       # override: gli basta 1 vCPU
-}
+    },
+    "dc" = {
+      hostname = "dc1"
+      ip       = "192.168.1.77"
+      mac      = "02:00:00:01:00:06"
+    }
   }
   # Costruisce la mappa finale delle VM iniettando i parametri hardware di default
   vms = {
