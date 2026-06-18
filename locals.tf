@@ -40,6 +40,7 @@ locals {
       hostname = "dc1"
       ip       = "192.168.1.77"
       mac      = "02:00:00:01:00:06"
+      memory   = 4096                    # override: il Domain Controller ha bisogno di più RAM
     }
   }
   # Costruisce la mappa finale delle VM iniettando i parametri hardware di default
