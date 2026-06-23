@@ -9,7 +9,8 @@ resource "libvirt_cloudinit_disk" "vm_init" {
 
   user_data = <<-EOF
     #cloud-config
-    hostname: ${each.value.hostname}.local
+    hostname: ${each.value.hostname}
+    fqdn: ${each.value.hostname}.${each.value.domain}
     users:
       - name: ubuntu
         groups: sudo
@@ -23,6 +24,16 @@ resource "libvirt_cloudinit_disk" "vm_init" {
           Package: snapd
           Pin: release a=*
           Pin-Priority: -10
+      - path: /etc/hosts
+        content: |
+          127.0.0.1   localhost
+          ${each.value.ip}   ${each.value.hostname}.${each.value.domain}   ${each.value.hostname}
+          ::1 ip6-localhost ip6-loopback
+          fe00::0 ip6-localnet
+          ff00::0 ip6-mcastprefix
+          ff02::1 ip6-allnodes
+          ff02::2 ip6-allrouters
+          ff02::3 ip6-allhosts
     package_update: true
     package_upgrade: false
     packages:
@@ -46,9 +57,8 @@ resource "libvirt_cloudinit_disk" "vm_init" {
           - to: default
             via: 192.168.1.1
         nameservers:
-          addresses:
-            - ${var.dns1}
-            - ${var.dns2}
+          addresses: ${jsonencode(each.value.nameservers)}
+          search: ${jsonencode(each.value.search)}
         dhcp4: false
         dhcp6: false
   EOF
