@@ -1,7 +1,7 @@
 variable "libvirt_uri" {
-    description = "Libvirt URI to connect to the hypervisor"
-    type        = string
-    default     = "qemu:///system"
+  description = "Libvirt URI to connect to the hypervisor"
+  type        = string
+  default     = "qemu:///system"
 }
 variable "storage_pool" {
   type        = string
@@ -26,19 +26,15 @@ variable "dns2" {
 }
 
 variable "ssh_public_key_path" {
-    type        = string
-    description = "Percorso locale della chiave SSH pubblica"
-    default     = "~/.ssh/id_archvm.pub"
+  type        = string
+  description = "Percorso locale della chiave SSH pubblica"
+  default     = "~/.ssh/id_archvm.pub"
 
 }
 
 variable "bridge_name" {
-    type        = string
-    default     = "bridge0"
-    description = "Name of the libvirt bridge to attach the VM's network interface to"
+  type        = string
+  default     = "bridge0"
+  description = "Name of the libvirt bridge to attach the VM's network interface to"
 }
 
-variable "control_count" {
-  type    = number
-  default = 2
-}

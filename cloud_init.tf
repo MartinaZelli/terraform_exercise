@@ -42,7 +42,9 @@ resource "libvirt_cloudinit_disk" "vm_init" {
         set-name: eth0
         addresses:
           - "${each.value.ip}/24"
-        gateway4: "192.168.1.1"
+        routes:
+          - to: default
+            via: 192.168.1.1
         nameservers:
           addresses:
             - ${var.dns1}
