@@ -45,6 +45,11 @@ locals {
       mac       = "02:00:00:01:00:05"
       ad_member = false
     },
+    "bastion" = {
+      hostname = "bastion"
+      ip       = "192.168.1.78"
+      mac      = "02:00:00:01:00:07"
+    },
     "dc" = {
       hostname             = "dc1"
       ip                   = "192.168.1.77"
