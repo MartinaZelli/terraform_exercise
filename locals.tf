@@ -16,35 +16,37 @@ locals {
   }
 
   vms_raw = {
-    # --- VM dell'applicazione: parcheggiate finché non rifacciamo l'app ---
-    # Per riattivarle: togli il commento e fai 'tofu apply'.
-    # "app" = {
-    #   hostname = "menu-app"
-    #   ip       = "192.168.1.72"
-    #   mac      = "02:00:00:01:00:01"
-    # },
+
+    "app" = {
+      hostname = "menu-app"
+      ip       = "192.168.1.72"
+      mac      = "02:00:00:01:00:01"
+    },
+    # da ripristinare per utilizzo reale haproxy quando avrai della RAM disponibile
     # "app2" = {
     #   hostname = "menu-app-2"
     #   ip       = "192.168.1.74"
     #   mac      = "02:00:00:01:00:03"
     # },
-    # "db" = {
-    #   hostname = "menu-db"
-    #   ip       = "192.168.1.73"
-    #   mac      = "02:00:00:01:00:02"
-    # },
+    "db" = {
+      hostname = "menu-db"
+      ip       = "192.168.1.73"
+      mac      = "02:00:00:01:00:02"
+    },
     "lb" = {
       hostname = "menu-lb"
       ip       = "192.168.1.75"
       mac      = "02:00:00:01:00:04"
 
     },
-    "ldap" = {
-      hostname  = "ldap"
-      ip        = "192.168.1.76"
-      mac       = "02:00:00:01:00:05"
-      ad_member = false
-    },
+    # --- ldap: server OpenLDAP del ramo di studio, parcheggiato.
+    # Per riattivarlo: togli il commento + 'tofu apply', poi rilancia l'Ansible LDAP.
+    # "ldap" = {
+    #   hostname  = "ldap"
+    #   ip        = "192.168.1.76"
+    #   mac       = "02:00:00:01:00:05"
+    #   ad_member = false
+    # },
     "bastion" = {
       hostname = "bastion"
       ip       = "192.168.1.78"
