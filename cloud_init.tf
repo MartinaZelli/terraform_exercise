@@ -34,6 +34,13 @@ resource "libvirt_cloudinit_disk" "vm_init" {
           ff02::1 ip6-allnodes
           ff02::2 ip6-allrouters
           ff02::3 ip6-allhosts
+      - path: /etc/sysctl.d/99-disable-ipv6.conf
+        content: |
+          # IPv6 disabilitato: il lab e IPv4 e l'IPv6 del router (RA)
+          # inietta DNS spuri che rompono la risoluzione del dominio AD.
+          net.ipv6.conf.all.disable_ipv6 = 1
+          net.ipv6.conf.default.disable_ipv6 = 1
+          net.ipv6.conf.lo.disable_ipv6 = 1
     package_update: true
     package_upgrade: false
     packages:
@@ -42,6 +49,7 @@ resource "libvirt_cloudinit_disk" "vm_init" {
       - DEBIAN_FRONTEND=noninteractive apt-get -y purge unattended-upgrades snapd
       - DEBIAN_FRONTEND=noninteractive apt-get -y autoremove --purge
       - rm -rf /root/snap /home/ubuntu/snap
+      - sysctl --system
   EOF
 
   network_config = <<-EOF
